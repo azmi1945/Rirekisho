@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pengisi CV Jepang 履歴書</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap');
+:root {
+  --red:#c0392b;--red-lt:#f9ecea;--dark:#1a1a2e;--mid:#2d2d44;
+  --ink:#2c2c2c;--muted:#6b7280;--border:#e0e0e8;--bg:#f5f5f7;
+  --green:#198754;--green-lt:#d1e7dd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans JP',sans-serif;background:var(--bg);color:var(--ink)}
+header{background:var(--dark);padding:16px 28px;display:flex;align-items:center;gap:14px;border-bottom:3px solid var(--red)}
+.hi{width:40px;height:40px;background:var(--red);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px}
+header h1{color:#fff;font-size:18px;font-weight:700}
+header p{color:#9ca3af;font-size:12px;margin-top:2px}
+.pill{background:var(--red-lt);color:var(--red);font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;margin-left:auto}
+.stepbar{background:var(--mid);padding:0 28px;display:flex;overflow-x:auto}
+.step{padding:10px 16px;font-size:12px;font-weight:500;color:#6b7280;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s}
+.step.active{color:#fff;border-bottom-color:var(--red)}
+.step.done{color:#9ca3af}
+.step .n{display:inline-flex;width:18px;height:18px;border-radius:50%;background:#374151;align-items:center;justify-content:center;font-size:11px;margin-right:5px}
+.step.active .n{background:var(--red);color:#fff}
+.step.done .n{background:#059669;color:#fff}
+.main{max-width:760px;margin:0 auto;padding:22px 16px 70px}
+.pg{display:none}.pg.active{display:block}
+.stitle{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--red);margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.card{background:#fff;border-radius:12px;padding:20px;margin-bottom:16px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.fr{display:grid;gap:12px;margin-bottom:12px;grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+.fr.full"><grid-template-columns:1fr}.fr.two{grid-template-columns:1fr 1fr}.fr.three{grid-template-columns:1fr 1fr 1fr}
+.fr.four{grid-template-columns:1fr 1fr 1fr 1fr}
+.fd{display:flex;flex-direction:column;gap:4px}
+label{font-size:12px;font-weight:600;color:var(--muted)}
+label .jp{font-family:'Noto Sans JP',sans-serif;font-weight:400;color:#9ca3af;font-size:11px;margin-left:4px}
+input,select,textarea{border:1.5px solid var(--border);border-radius:7px;padding:8px 11px;font-size:14px;font-family:inherit;color:var(--ink);background:#fff;transition:border-color .15s;width:100%}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(192,57,43,.1)}
+textarea{resize:vertical;min-height:72px}
+.rg{display:flex;gap:7px;flex-wrap:wrap}
+.rb{padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:13px;cursor:pointer;background:#fff;color:var(--ink);font-family:inherit;transition:all .15s}
+.rb.sel{background:var(--red);border-color:var(--red);color:#fff}
+.tr{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f3f4f6}
+.tr:last-child{border-bottom:none}
+.tl{font-size:13px}.tl .jp{font-size:11px;color:var(--muted);margin-left:5px}
+.tog{position:relative;width:40px;height:22px}
+.tog input{opacity:0;width:0;height:0}
+.tsl{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:#e5e7eb;border-radius:22px;transition:.2s}
+.tsl:before{content:'';position:absolute;height:16px;width:16px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.tog input:checked+.tsl{background:var(--red)}
+.tog input:checked+.tsl:before{transform:translateX(18px)}
+.de{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:13px;margin-bottom:9px}
+.deh{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.en{font-size:12px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.5px}
+.brm{background:none;border:none;color:#9ca3af;cursor:pointer;font-size:18px;padding:2px 6px;border-radius:4px}
+.brm:hover{color:var(--red)}
+.badd{width:100%;padding:9px;border:1.5px dashed var(--border);border-radius:8px;background:#fff;color:var(--muted);font-size:13px;font-family:inherit;cursor:pointer;margin-top:3px}
+.badd:hover{border-color:var(--red);color:var(--red);background:var(--red-lt)}
+.navr{display:flex;justify-content:space-between;align-items:center;margin-top:20px;gap:10px}
+.bprev{padding:10px 22px;border:1.5px solid var(--border);border-radius:8px;background:#fff;color:var(--muted);font-size:14px;font-weight:600;font-family:inherit;cursor:pointer}
+.bprev:hover{border-color:#9ca3af;color:var(--ink)}
+.bnext{padding:10px 26px;border:none;border-radius:8px;background:var(--red);color:#fff;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer}
+.bnext:hover{background:#a93226}
+.bdl{padding:13px 28px;border:none;border-radius:10px;background:var(--dark);color:#fff;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .15s}
+.bdl:hover{background:var(--mid)}.bdl:disabled{background:#9ca3af;cursor:not-allowed}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.si{background:var(--bg);border-radius:8px;padding:11px 13px}
+.si .k{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.si .v{font-size:13px;color:var(--ink);font-weight:500}
+.hint{font-size:12px;color:var(--muted);margin-top:3px}
+.ok{color:#059669;font-size:14px;margin-top:10px;font-weight:500}
+.err{color:#dc2626;font-size:14px;margin-top:10px}
+
+/* Photo upload */
+.photo-box{border:2px dashed var(--border);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.photo-box:hover,.photo-box.drag{border-color:var(--red);background:var(--red-lt)}
+.photo-box input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.photo-preview{width:120px;height:160px;object-fit:cover;border-radius:8px;border:2px solid var(--border);margin:0 auto;display:block}
+.photo-hint{font-size:13px;color:var(--muted);margin-top:8px}
+.photo-icon{font-size:40px;margin-bottom:8px}
+
+/* Loading */
+.overlay{display:none;position:fixed;inset:0;background:rgba(26,26,46,.65);z-index:100;align-items:center;justify-content:center;flex-direction:column;gap:14px}
+.overlay.show{display:flex}
+.spin{width:44px;height:44px;border:4px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.overlay p{color:#fff;font-size:15px;font-weight:600}
+@media(max-width:600px){.fr.three{grid-template-columns:1fr 1fr}.fr.four{grid-template-columns:1fr 1fr}.sg{grid-template-columns:1fr}header{padding:12px 14px}}
+</style>
+</head>
+<body>
+<div class="overlay" id="ov"><div class="spin"></div><p id="ovMsg">Membuat file Excel...</p></div>
+
+<header>
+  <div class="hi">🗾</div>
+  <div><h1>Pengisi CV Jepang 履歴書</h1><p>Isi form → Download Excel dengan format persis seperti template</p></div>
+  <div class="pill" id="ppill">1 / 6</div>
+</header>
+
+<div class="stepbar">
+  <div class="step active" onclick="go(0)"><span class="n">1</span>Data Diri</div>
+  <div class="step" onclick="go(1)"><span class="n">2</span>Fisik & Foto</div>
+  <div class="step" onclick="go(2)"><span class="n">3</span>Pendidikan</div>
+  <div class="step" onclick="go(3)"><span class="n">4</span>Keluarga</div>
+  <div class="step" onclick="go(4)"><span class="n">5</span>Motivasi</div>
+  <div class="step" onclick="go(5)"><span class="n">6</span>Download CV</div>
+</div>
+
+<div class="main">
+
+<div class="pg active" id="pg0">
+  <div class="card">
+    <div class="stitle">Identitas Dasar</div>
+    <div class="fr full"><div class="fd"><label>Nama Lengkap <span class="jp">氏名</span></label><input id="nama" placeholder="Nama dalam huruf KAPITAL sesuai paspor/KTP"></div></div>
+    <div class="fr full"><div class="fd"><label>Furigana <span class="jp">フリガナ</span></label><input id="furigana" placeholder="ナマ ダラム カタカナ"><p class="hint">Nama dalam Katakana — bisa diisi SO jika belum tahu</p></div></div>
+    <div class="fr two">
+      <div class="fd"><label>Panggilan <span class="jp">ニックネーム</span></label><input id="nickname" placeholder="Nama panggilan"></div>
+      <div class="fd"><label>Jenis Kelamin <span class="jp">性別</span></label>
+        <div class="rg" id="gG">
+          <button class="rb sel" onclick="sr('gG','女性',this)">Perempuan 女性</button>
+          <button class="rb" onclick="sr('gG','男性',this)">Laki-laki 男性</button>
+        </div>
+      </div>
+    </div>
+    <div class="fr three">
+      <div class="fd"><label>Tahun Lahir</label><input type="number" id="tth" placeholder="2000" min="1950" max="2015"></div>
+      <div class="fd"><label>Bulan Lahir</label>
+        <select id="tbl">
+          <option value="">--</option>
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+          <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+          <option value="10">10</option><option value="11">11</option><option value="12">12</option>
+        </select>
+      </div>
+      <div class="fd"><label>Tanggal Lahir</label><input type="number" id="thr" placeholder="1" min="1" max="31"></div>
+    </div>
+    <div class="fr two">
+      <div class="fd"><label>Umur <span class="jp">年齢</span></label><input type="number" id="umur" placeholder="20"></div>
+      <div class="fd"><label>Agama <span class="jp">宗教</span></label><input id="agama" placeholder="Islam, Kristen, dll — kosongkan jika tidak mau dicantumkan"></div>
+    </div>
+    <div class="fr full"><div class="fd"><label>Alamat Lengkap <span class="jp">住所</span></label><textarea id="alamat" rows="2" placeholder="Dusun/RT/RW/Desa/Kecamatan/Kabupaten/Provinsi"></textarea></div></div>
+  </div>
+  <div class="navr"><div></div><button class="bnext" onclick="go(1)">Lanjut →</button></div>
+</div>
+
+<div class="pg" id="pg1">
+  <div class="card">
+    <div class="stitle">Foto <span class="jp">証明写真</span></div>
+    <div class="photo-box" id="photoBox" onclick="document.getElementById('photoFile').click()">
+      <input type="file" id="photoFile" accept="image/*" onchange="loadPhoto(event)" style="display:none">
+      <div id="photoEmpty">
+        <div class="photo-icon">📷</div>
+        <p style="font-size:14px;font-weight:600;color:var(--ink)">Klik untuk upload foto</p>
+        <p class="photo-hint">Format JPG/PNG · Foto formal (pas foto) · Wajah jelas</p>
+      </div>
+      <img id="photoPreview" class="photo-preview" style="display:none">
+    </div>
+    <button id="removePho" style="display:none;margin-top:8px;background:none;border:none;color:var(--red);font-size:13px;cursor:pointer;font-family:inherit" onclick="removePhoto()">✕ Hapus foto</button>
+  </div>
+  <div class="card">
+    <div class="stitle">Kontak</div>
+    <div class="fr two">
+      <div class="fd"><label>No. HP <span class="jp">携帯</span></label><input type="tel" id="hp" placeholder="08xxxxxxxxx"></div>
+      <div class="fd"><label>Email <span class="jp">メール</span></label><input type="email" id="email" placeholder="nama@email.com"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="stitle">Data Fisik</div>
+    <div class="fr three">
+      <div class="fd"><label>Tinggi (cm) <span class="jp">身長</span></label><input type="number" id="tinggi" placeholder="160"></div>
+      <div class="fd"><label>Berat (kg) <span class="jp">体重</span></label><input type="number" id="berat" placeholder="55"></div>
+      <div class="fd"><label>Gol. Darah <span class="jp">血液型</span></label>
+        <div class="rg" id="bG">
+          <button class="rb" onclick="sr('bG','A',this)">A</button>
+          <button class="rb" onclick="sr('bG','B',this)">B</button>
+          <button class="rb" onclick="sr('bG','O',this)">O</button>
+          <button class="rb" onclick="sr('bG','AB',this)">AB</button>
+        </div>
+      </div>
+    </div>
+    <div class="fr three">
+      <div class="fd"><label>Ukuran Baju <span class="jp">制服</span></label>
+        <div class="rg" id="bjG"><button class="rb" onclick="sr('bjG','S',this)">S</button><button class="rb" onclick="sr('bjG','M',this)">M</button><button class="rb sel" onclick="sr('bjG','L',this)">L</button><button class="rb" onclick="sr('bjG','XL',this)">XL</button></div>
+      </div>
+      <div class="fd"><label>Ukuran Celana <span class="jp">ズボン</span></label>
+        <div class="rg" id="clG"><button class="rb" onclick="sr('clG','S',this)">S</button><button class="rb" onclick="sr('clG','M',this)">M</button><button class="rb sel" onclick="sr('clG','L',this)">L</button><button class="rb" onclick="sr('clG','XL',this)">XL</button></div>
+      </div>
+      <div class="fd"><label>Ukuran Sepatu <span class="jp">靴</span></label><input type="number" id="sepatu" placeholder="24.5" step="0.5"></div>
+    </div>
+    <div class="fr two">
+      <div class="fd"><label>Tangan Dominan <span class="jp">利き手</span></label>
+        <div class="rg" id="tgG"><button class="rb sel" onclick="sr('tgG','右',this)">Kanan 右</button><button class="rb" onclick="sr('tgG','左',this)">Kiri 左</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="stitle">Kondisi Kesehatan & Kebiasaan</div>
+    <div class="tr"><span class="tl">Alergi <span class="jp">アレルギー</span></span><label class="tog"><input type="checkbox" id="alergi"><span class="tsl"></span></label></div>
+    <div class="tr"><span class="tl">Tato <span class="jp">刺青</span></span><label class="tog"><input type="checkbox" id="tato"><span class="tsl"></span></label></div>
+    <div class="tr"><span class="tl">Masalah Penglihatan <span class="jp">視力問題</span></span><label class="tog"><input type="checkbox" id="mpen"><span class="tsl"></span></label></div>
+    <div class="tr"><span class="tl">Buta Warna <span class="jp">色覚異常</span></span><label class="tog"><input type="checkbox" id="bwrn"><span class="tsl"></span></label></div>
+    <div class="tr"><span class="tl">Minum Alkohol <span class="jp">飲酒</span></span><label class="tog"><input type="checkbox" id="alkh"><span class="tsl"></span></label></div>
+    <div class="tr"><span class="tl">Merokok <span class="jp">煙草</span></span><label class="tog"><input type="checkbox" id="rok"><span class="tsl"></span></label></div>
+  </div>
+  <div class="navr"><button class="bprev" onclick="go(0)">← Kembali</button><button class="bnext" onclick="go(2)">Lanjut →</button></div>
+</div>
+
+<div class="pg" id="pg2">
+  <div class="card">
+    <div class="stitle">Riwayat Pendidikan <span class="jp" style="text-transform:none">学歴</span></div>
+    <div id="eduList"></div>
+    <button class="badd" onclick="addEdu()">+ Tambah Sekolah</button>
+  </div>
+  <div class="card">
+    <div class="stitle">Pengalaman Kerja <span class="jp" style="text-transform:none">職歴</span></div>
+    <div id="workList"></div>
+    <button class="badd" onclick="addWork()">+ Tambah Pengalaman Kerja</button>
+    <p class="hint" style="margin-top:7px">Kosongkan jika belum pernah bekerja — otomatis terisi 未経験</p>
+  </div>
+  <div class="navr"><button class="bprev" onclick="go(1)">← Kembali</button><button class="bnext" onclick="go(3)">Lanjut →</button></div>
+</div>
+
+<div class="pg" id="pg3">
+  <div class="card">
+    <div class="stitle">Susunan Keluarga <span class="jp" style="text-transform:none">家族構成</span></div>
+    <div id="famList"></div>
+    <button class="badd" onclick="addFam()">+ Tambah Anggota Keluarga</button>
+  </div>
+  <div class="navr"><button class="bprev" onclick="go(2)">← Kembali</button><button class="bnext" onclick="go(4)">Lanjut →</button></div>
+</div>
+
+<div class="pg" id="pg4">
+  <div class="card">
+    <div class="stitle">Kelebihan & Kekurangan</div>
+    <div class="fr two">
+      <div class="fd"><label>Kelebihan <span class="jp">長所</span></label><textarea id="kbh" rows="3" placeholder="Bisa bekerja sendiri maupun tim..."></textarea></div>
+      <div class="fd"><label>Kekurangan <span class="jp">短所</span></label><textarea id="kkr" rows="3" placeholder="Agak pemalu, tapi selalu berusaha..."></textarea></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="stitle">Motivasi Kerja di Jepang</div>
+    <div class="fr full"><div class="fd"><label>Alasan 1 (Prioritas Utama)</label><input id="a1" placeholder="Ingin menabung untuk membangun rumah"></div></div>
+    <div class="fr full"><div class="fd"><label>Alasan 2</label><input id="a2" placeholder="Opsional"></div></div>
+    <div class="fr full"><div class="fd"><label>Alasan 3</label><input id="a3" placeholder="Opsional"></div></div>
+    <div class="fr two">
+      <div class="fd"><label>Durasi Ingin Kerja di Jepang (tahun)</label><input type="number" id="dur" placeholder="3" min="1" max="10"></div>
+      <div class="fd"><label>Lama Belajar Bahasa Jepang</label><input id="ljp" placeholder="6ヶ月間 / 1年間"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="stitle">Self PR <span class="jp" style="text-transform:none">自己PR</span></div>
+    <div class="fd"><textarea id="spr" rows="4" placeholder="Ceritakan tentang diri kamu dan kenapa ingin bekerja di perusahaan ini..."></textarea></div>
+  </div>
+  <div class="card">
+    <div class="stitle">Catatan Tambahan <span class="jp" style="text-transform:none">備考欄</span></div>
+    <div class="fd"><input id="cat" placeholder="Kosongkan = otomatis Özellikle ございません。"></div>
+  </div>
+  <div class="navr"><button class="bprev" onclick="go(3)">← Kembali</button><button class="bnext" onclick="go(5)">Cek & Unduh →</button></div>
+</div>
+
+<div class="pg" id="pg5">
+  <div class="card">
+    <div class="stitle">Ringkasan Data</div>
+    <div class="sg" id="sgrid"></div>
+  </div>
+  <div class="card">
+    <div class="stitle">Download File Excel</div>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:16px">File Excel akan dibuat identik dengan format 履歴書 yang kamu gunakan — border, warna hijau, merged cells, dan ukuran kolom sama persis. Foto (jika diupload) akan otomatis tertanam di kotak foto.</p>
+    <button class="bdl" id="dlBtn" onclick="downloadCV()">📥 Download CV.xlsx</button>
+    <p id="dlSt"></p>
+  </div>
+  <div class="navr"><button class="bprev" onclick="go(4)">← Kembali Edit</button><div></div></div>
+</div>
+
+</div><script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script>
+// ── State ──
+let cur = 0;
+const R = {gG:'女性',tgG:'右',bjG:'L',clG:'L'};
+let photoB64 = null;
+
+// ── Radio ──
+function sr(gid, val, btn) {
+  R[gid] = val;
+  btn.closest('.rg').querySelectorAll('.rb').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+}
+
+// ── Nav ──
+function go(n) {
+  document.getElementById('pg'+cur).classList.remove('active');
+  const steps = document.querySelectorAll('.step');
+  steps[cur].classList.remove('active'); steps[cur].classList.add('done');
+  cur = n;
+  document.getElementById('pg'+n).classList.add('active');
+  steps.forEach((s,i)=>{s.classList.remove('active');if(i<n)s.classList.add('done');else if(i===n){s.classList.add('active');s.classList.remove('done');}else s.classList.remove('done');});
+  document.getElementById('ppill').textContent=(n+1)+' / 6';
+  if(n===5) buildSummary();
+  window.scrollTo(0,0);
+}
+
+// ── Photo ──
+function loadPhoto(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const dataUrl = ev.target.result;
+    photoB64 = dataUrl.split(',')[1];
+    document.getElementById('photoEmpty').style.display = 'none';
+    const prev = document.getElementById('photoPreview');
+    prev.src = dataUrl; prev.style.display = 'block';
+    document.getElementById('removePho').style.display = 'inline-block';
+  };
+  reader.readAsDataURL(file);
+}
+function removePhoto() {
+  photoB64 = null;
+  document.getElementById('photoPreview').style.display = 'none';
+  document.getElementById('photoEmpty').style.display = 'block';
+  document.getElementById('removePho').style.display = 'none';
+  document.getElementById('photoFile').value = '';
+}
+
+// ── Helpers ──
+const v = id => { const el=document.getElementById(id); return el?el.value.trim():''; };
+const num = id => { const x=v(id); return x?parseInt(x):null; };
+const numF = id => { const x=v(id); return x?parseFloat(x):null; };
+const chk = id => { const el=document.getElementById(id); return el?el.checked:false; };
+
+// ── Fitur Hitung Umur Otomatis ──
+function hitungUmur() {
+  const th = num('tth'), bl = num('tbl'), hr = num('thr');
+  if (th && bl && hr) {
+    const today = new Date();
+    const birthDate = new Date(th, bl - 1, hr);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
+    document.getElementById('umur').value = age;
+  }
+}
+
+// ── Education (Tanpa Batas Maksimal & Label Auto Urut) ──
+let eduIds = [];
+function updateEduLabels() {
+  document.querySelectorAll('#eduList .en').forEach((el, idx) => el.textContent = `Sekolah ${idx + 1}`);
+}
+function addEdu(data={}) {
+  const id = 'edu_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+  eduIds.push(id);
+  const div = document.createElement('div');
+  div.className='de'; div.id='div_edu_'+id;
+  const opts=[['SD','小学校'],['SMP','中学校'],['SMA','高等学校'],['SMK','高等学校/SMK'],['D3','専門学校'],['S1','大学'],['S2','大学院']].map(([v,l])=>`<option value="${v}">${v} (${l})</option>`).join('');
+  div.innerHTML=`<div class="deh"><span class="en">Sekolah</span><button class="brm" onclick="rmEdu('${id}')">×</button></div>
+    <div class="fr full"><div class="fd"><label>Nama Sekolah</label><input id="en_${id}" placeholder="SDN / SMPN / SMAN / Universitas ..."></div></div>
+    <div class="fr two"><div class="fd"><label>Jenjang</label><select id="ej_${id}">${opts}</select></div><div class="fd"><label>Jurusan (jika ada)</label><input id="ek_${id}" placeholder="IPA, Teknik, Keperawatan ..."></div></div>
+    <div class="fr four">
+      <div class="fd"><label>Tahun Masuk</label><input type="number" id="emi_th_${id}" placeholder="2016"></div>
+      <div class="fd"><label>Bulan Masuk</label><input type="number" id="emi_bl_${id}" placeholder="7" min="1" max="12"></div>
+      <div class="fd"><label>Tahun Lulus</label><input type="number" id="elu_th_${id}" placeholder="2019"></div>
+      <div class="fd"><label>Bulan Lulus</label><input type="number" id="elu_bl_${id}" placeholder="7" min="1" max="12"></div>
+    </div>`;
+  document.getElementById('eduList').appendChild(div);
+  if(data.jenjang) document.getElementById('ej_'+id).value=data.jenjang;
+  updateEduLabels();
+}
+function rmEdu(id){
+  eduIds = eduIds.filter(e => e !== id);
+  const el = document.getElementById('div_edu_'+id);
+  if(el) el.remove();
+  updateEduLabels();
+}
+function getEdu(){return eduIds.map(id=>({nama_sekolah:v('en_'+id),jenjang:v('ej_'+id),jurusan:v('ek_'+id),masuk:{tahun:num('emi_th_'+id),bulan:num('emi_bl_'+id)},lulus:{tahun:num('elu_th_'+id),bulan:num('elu_bl_'+id)}}))}
+
+// ── Work (Tanpa Batas Maksimal & Label Auto Urut) ──
+let workIds = [];
+function updateWorkLabels() {
+  document.querySelectorAll('#workList .en').forEach((el, idx) => el.textContent = `Pekerjaan ${idx + 1}`);
+}
+function addWork() {
+  const id = 'work_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+  workIds.push(id);
+  const div=document.createElement('div');
+  div.className='de';div.id='div_wrk_'+id;
+  div.innerHTML=`<div class="deh"><span class="en">Pekerjaan</span><button class="brm" onclick="rmWork('${id}')">×</button></div>
+    <div class="fr full"><div class="fd"><label>Nama Perusahaan</label><input id="wn_${id}" placeholder="PT / CV / Toko ..."></div></div>
+    <div class="fr two"><div class="fd"><label>Jenis Pekerjaan</label><input id="wj_${id}" placeholder="Operator, Kasir, dll"></div><div class="fd"><label>Jabatan</label><input id="wjb_${id}"></div></div>
+    <div class="fr four">
+      <div class="fd"><label>Tahun Masuk</label><input type="number" id="wmi_th_${id}"></div>
+      <div class="fd"><label>Bulan Masuk</label><input type="number" id="wmi_bl_${id}" min="1" max="12"></div>
+      <div class="fd"><label>Tahun Keluar</label><input type="number" id="wke_th_${id}"></div>
+      <div class="fd"><label>Bulan Keluar</label><input type="number" id="wke_bl_${id}" min="1" max="12"></div>
+    </div>`;
+  document.getElementById('workList').appendChild(div);
+  updateWorkLabels();
+}
+function rmWork(id){
+  workIds = workIds.filter(e => e !== id);
+  const el = document.getElementById('div_wrk_'+id);
+  if(el) el.remove();
+  updateWorkLabels();
+}
+function getWork(){return workIds.map(id=>({nama_perusahaan:v('wn_'+id),jenis_pekerjaan:v('wj_'+id),jabatan:v('wjb_'+id),masuk:{tahun:num('wmi_th_'+id),bulan:num('wmi_bl_'+id)},keluar:{tahun:num('wke_th_'+id),bulan:num('wke_bl_'+id)}}))}
+
+// ── Family (Tanpa Batas Maksimal & Label Auto Urut) ──
+let famIds = [];
+const relMap={Ayah:'父',Ibu:'母','Kakak Laki':'兄','Kakak Perempuan':'姉','Adik Laki':'弟','Adik Perempuan':'妹',Suami:'夫',Istri:'妻'};
+function updateFamLabels() {
+  document.querySelectorAll('#famList .en').forEach((el, idx) => el.textContent = `Anggota ${idx + 1}`);
+}
+function addFam(data={}) {
+  const id = 'fam_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+  famIds.push(id);
+  const div=document.createElement('div');div.className='de';div.id='div_fam_'+id;
+  const opts=Object.keys(relMap).map(k=>`<option value="${k}">${k} (${relMap[k]})</option>`).join('');
+  div.innerHTML=`<div class="deh"><span class="en">Anggota</span><button class="brm" onclick="rmFam('${id}')">×</button></div>
+    <div class="fr three">
+      <div class="fd"><label>Hubungan</label><select id="fh_${id}">${opts}</select></div>
+      <div class="fd"><label>Nama</label><input id="fn_${id}" placeholder="Nama lengkap"></div>
+      <div class="fd"><label>Umur</label><input type="number" id="fu_${id}" placeholder="45"></div>
+    </div>
+    <div class="fr full"><div class="fd"><label>Pekerjaan</label><input id="fk_${id}" placeholder="Petani, PNS, Ibu Rumah Tangga, Pelajar ..."></div></div>`;
+  document.getElementById('famList').appendChild(div);
+  if(data.hub) document.getElementById('fh_'+id).value=data.hub;
+  updateFamLabels();
+}
+function rmFam(id){
+  famIds = famIds.filter(e => e !== id);
+  const el = document.getElementById('div_fam_'+id);
+  if(el) el.remove();
+  updateFamLabels();
+}
+function getFam(){return famIds.map(id=>({hubungan:v('fh_'+id),nama:v('fn_'+id),umur:num('fu_'+id),pekerjaan:v('fk_'+id)}))}
+
+// ── Summary ──
+function buildSummary() {
+  const items=[
+    ['Nama',v('nama')],['Furigana',v('furigana')],
+    ['Jenis Kelamin',R['gG']||'-'],['Tgl Lahir',`${v('tth')}-${v('tbl')}-${v('thr')}`],
+    ['Email',v('email')],['No. HP',v('hp')],
+    ['Tinggi/Berat',`${v('tinggi')} cm / ${v('berat')} kg`],['Gol. Darah',R['bG']||'-'],
+    ['Foto',photoB64?'✅ Sudah diupload':'❌ Belum ada foto'],
+    ['Pendidikan',getEdu().map(e=>e.nama_sekolah).filter(Boolean).join(', ')||'-'],
+    ['Pengalaman Kerja',getWork().length?getWork().map(w=>w.nama_perusahaan).join(', '):'未経験'],
+    ['Keluarga',getFam().length+' orang'],
+  ];
+  document.getElementById('sgrid').innerHTML=items.map(([k,val])=>`<div class="si"><div class="k">${k}</div><div class="v">${val||'-'}</div></div>`).join('');
+}
+
+// ── Collect all data ──
+function collect() {
+  return {
+    nama:v('nama'),furigana:v('furigana'),nickname:v('nickname'),
+    tanggal_lahir:{tahun:num('tth'),bulan:num('tbl'),hari:num('thr')},
+    umur:num('umur'),jenis_kelamin:R['gG']||'女性',agama:v('agama'),
+    telepon:v('hp'),email:v('email'),
+    tangan_dominan:R['tgG']||'右',ukuran_baju:R['bjG']||'L',
+    ukuran_celana:R['clG']||'L',ukuran_sepatu:numF('sepatu'),
+    tinggi:num('tinggi'),berat:num('berat'),golongan_darah:R['bG']||'',
+    alergi:chk('alergi'),tato:chk('tato'),masalah_penglihatan:chk('mpen'),
+    buta_warna:chk('bwrn'),minum_alkohol:chk('alkh'),merokok:chk('rok'),
+    alamat:v('alamat'),pendidikan:getEdu(),pengalaman_kerja:getWork(),keluarga:getFam(),
+    kelebihan:v('kbh'),kekurangan:v('kkr'),
+    durasi_ingin_kerja_jepang:num('dur'),
+    alasan_kerja_jepang:[v('a1'),v('a2'),v('a3')].filter(Boolean),
+    lama_belajar_jepang:v('ljp'),self_pr:v('spr'),
+    catatan:v('cat')||'特にございません。',
+    _photo_b64:photoB64
+  };
+}
+
+// ── ExcelJS Styling Helper ──
+const GREEN = 'C6EFCE'; 
+
+function applyCellStyle(cell, { fill, bold, fontSize, hAlign, wrap }) {
+  if (fill) {
+    cell.fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'FF' + fill }
+    };
+  } else {
+    cell.fill = { type: 'none' }; 
+  }
+  cell.font = {
+    name: 'Calibri',
+    size: fontSize || 14,
+    bold: bold || false,
+    color: { argb: 'FF000000' }
+  };
+  cell.alignment = {
+    horizontal: hAlign || 'left',
+    vertical: 'middle',
+    wrapText: wrap || false
+  };
+  cell.border = {
+    top: { style: 'thin', color: { argb: 'FF000000' } },
+    left: { style: 'thin', color: { argb: 'FF000000' } },
+    bottom: { style: 'thin', color: { argb: 'FF000000' } },
+    right: { style: 'thin', color: { argb: 'FF000000' } }
+  };
+}
+
+// ── Build Excel using ExcelJS ──
+async function downloadCV() {
+  const btn = document.getElementById('dlBtn');
+  const st  = document.getElementById('dlSt');
+  btn.disabled = true;
+  document.getElementById('ov').classList.add('show');
+  document.getElementById('ovMsg').textContent = 'Membuat file Excel...';
+  st.textContent = '';
+
+  try {
+    const d = collect();
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('CV', {
+      views: [{ showGridLines: true }]
+    });
+
+    function slbl(addr, text, sz) {
+      const cell = worksheet.getCell(addr);
+      cell.value = text;
+      applyCellStyle(cell, { fill: null, bold: false, fontSize: sz || 14, hAlign: 'center', wrap: true });
+    }
+    function sdat(addr, val, hAlign, wrap) {
+      const cell = worksheet.getCell(addr);
+      cell.value = val === null || val === undefined ? '' : val;
+      applyCellStyle(cell, { fill: GREEN, bold: false, fontSize: 14, hAlign: hAlign || 'left', wrap: wrap || false });
+    }
+    function sdatC(addr, val) { sdat(addr, val, 'center', false); }
+    function sdatW(addr, val) { sdat(addr, val, 'left', true); }
+
+    for(let r=1;r<=55;r++) {
+      for(let c=1;c<=27;c++) {
+        const cell = worksheet.getCell(r, c);
+        cell.value = '';
+        applyCellStyle(cell, { fill: null, bold: false, fontSize: 14, hAlign: 'left', wrap: false });
+      }
+    }
+
+    // ── Row 1-4: Title ──
+    const g1 = worksheet.getCell('G1'); g1.value = '履歴書'; applyCellStyle(g1, { fill: null, bold: false, fontSize: 24, hAlign: 'center' });
+    const a1 = worksheet.getCell('A1'); a1.value = ''; applyCellStyle(a1, { fill: null, bold: false, fontSize: 14, hAlign: 'center' });
+    const u1 = worksheet.getCell('U1'); u1.value = d._photo_b64 ? '' : 'FOTO RAPIH'; applyCellStyle(u1, { fill: GREEN, bold: false, fontSize: 14, hAlign: 'center' }); 
+
+    // ── Row 5-6: Company ──
+    slbl('A5', '企業名');
+    sdat('E5', d.perusahaan||'DI ISI OLEH SO');
+
+    // ── Row 7-9: Name ──
+    slbl('A7', '氏名'); sdat('E7', d.nama||'');
+    slbl('O7', '面接順番'); sdat('O8', 'DI ISI OLEH SO', 'center');
+    slbl('A8', 'フリガナ'); sdat('E8', d.furigana||'');
+    slbl('A9', 'ニックネーム'); sdat('E9', d.nickname||'');
+
+    // ── Row 10-11: DOB/Age/Gender ──
+    const thl = d.tanggal_lahir||{};
+    slbl('A10', '生年月日');
+    sdatC('E10', thl.tahun||'');
+    const h10 = worksheet.getCell('H10'); h10.value = '年'; applyCellStyle(h10, { fill: null, bold: false, fontSize: 14, hAlign: 'center' });
+    sdatC('I10', thl.bulan||'');
+    const j10 = worksheet.getCell('J10'); j10.value = '月'; applyCellStyle(j10, { fill: null, bold: false, fontSize: 14, hAlign: 'center' });
+    sdatC('K10', thl.hari||'');
+    const l10 = worksheet.getCell('L10'); l10.value = '日'; applyCellStyle(l10, { fill: null, bold: false, fontSize: 14, hAlign: 'center' });
+    
+    slbl('M10', '年齢'); sdatC('O10', d.umur||'');
+    slbl('Q10', '性別'); sdatC('S10', d.jenis_kelamin||'女性');
+
+    slbl('A11', '宗教');
+    sdatC('E11', d.agama?'有':'無'); sdat('I11', d.agama||'');
+
+    // ── Row 12-14: Contact ──
+    slbl('A12', '連絡先');
+    slbl('A13', '携帯'); slbl('J13', 'メール');
+    sdat('A14', d.telepon||''); sdat('J14', d.email||'');
+
+    // ── Row 15: Sizes ──
+    slbl('A15','利き手'); sdatC('E15', d.tangan_dominan||'右');
+    slbl('J15','制服'); sdatC('M15', d.ukuran_baju||'');
+    slbl('P15','ズボン'); sdatC('S15', d.ukuran_celana||'');
+    slbl('V15','靴'); sdatC('Y15', d.ukuran_sepatu||'');
+
+    // ── Row 16: Body ──
+    slbl('A16','身長'); sdatC('D16', d.tinggi||'');
+    slbl('H16','体重'); sdatC('J16', d.berat||'');
+    slbl('M16','血液型'); sdatC('O16', d.golongan_darah||'');
+    slbl('Q16','アレルギー'); sdatC('U16', d.alergi?'有':'無');
+    slbl('X16','刺青'); sdatC('Z16', d.tato?'有':'無');
+
+    // ── Row 17: Health ──
+    slbl('A17','視力問題'); sdatC('D17', d.masalah_penglihatan?'有':'無');
+    slbl('F17','色覚異常'); sdatC('I17', d.buta_warna?'有':'無');
+    slbl('L17','飲酒'); sdatC('N17', d.minum_alkohol?'有':'無');
+    slbl('Q17','煙草'); sdatC('S17', d.merokok?'有':'無');
+    sdatC('V17','本/日');
+    slbl('X17','その他'); sdatC('Z17','無');
+
+    // ── Row 18-21: Address ──
+    slbl('A18','住所');
+    sdatW('A19', d.alamat||'');
+
+    // ── Row 22-26: Education ──
+    slbl('A22','学歴');
+    slbl('A23','学校名'); slbl('K23','専攻'); slbl('P23','期間');
+    const jmap={SD:'小学校',SMP:'中学校',SMA:'高等学校',SMK:'高等学校',D3:'専門学校',S1:'大学',S2:'大学院'};
+    const eduRows=[24,25,26];
+    eduRows.forEach((rn,i)=>{
+      const e=(d.pendidikan||[])[i]||{};
+      sdat('A'+rn, e.nama_sekolah||'');
+      sdatC('H'+rn, jmap[e.jenjang]||e.jenjang||'');
+      sdat('K'+rn, e.jurusan||'');
+      const mi=e.masuk||{}, lu=e.lulus||{};
+      
+      sdatC('P'+rn, mi.tahun||'');
+      const r_rn = worksheet.getCell('R'+rn); r_rn.value = '年'; applyCellStyle(r_rn, { fill: null, bold: false, fontSize: 14, hAlign: 'center' });
+      sdatC('S'+rn, mi.bulan||'');
+      const t_rn = worksheet.getCell('T'+rn); t_rn.value = '月入学'; applyCellStyle(t_rn, { fill: null, bold: false, fontSize: 14, hAlign: 'center' });
+      
+      sdatC('V'+rn, lu.tahun||'');
+      const x_rn = worksheet.getCell('X'+rn); x_rn.value = '年'; applyCellStyle(x_rn, { fill: null, bold: false, fontSize: 14, hAlign: 'center' });
+      sdatC('Y'+rn, lu.bulan||'');
+      const z_rn = worksheet.getCell('Z'+rn); z_rn.value = '月卒業'; applyCellStyle(z_rn, { fill: null, bold: false, fontSize: 14, hAlign: 'center' });
+    });
+
+    // ── Row 27-31: Work ──
+    slbl('A27','職歴'); slbl('A28','会社名'); slbl('H28','期間'); slbl('T28','職類');
+    const wrk=(d.pengalaman_kerja||[])[0];
+    if(wrk) {
+      sdat('A29', wrk.nama_perusahaan||'');
+      const mi=wrk.masuk||{},ke=wrk.keluar||{};
+      sdatC('H29',mi.tahun||'');
+      const j29 = worksheet.getCell('J29'); j29.value = '年'; applyCellStyle(j29, { fill: null, bold: false, fontSize: 14, hAlign: 'center' });
+      const l29 = worksheet.getCell('L29'); l29.value = '月入社'; applyCellStyle(l29, { fill: null, bold: false, fontSize: 14, hAlign: 'center' });
+      sdatC('N29',ke.tahun||'');
+      const p29 = worksheet.getCell('P29'); p29.value = '年'; applyCellStyle(p29, { fill: null, bold: false, fontSize: 14, hAlign: 'center' });
+      const r29 = worksheet.getCell('R29'); r29.value = '月退社'; applyCellStyle(r29, { fill: null, bold: false, fontSize: 14, hAlign: 'center' });
+      sdat('T29',wrk.jenis_pekerjaan||'');
+      slbl('H30','在籍期間'); sdat('K30','');
+      sdat('T30',wrk.jabatan||'');
+    } else {
+      sdatC('A29','未経験');
+      const j29 = worksheet.getCell('J29'); j29.value = '年'; applyCellStyle(j29, { fill: null, bold: false, fontSize: 14, hAlign: 'center' });
+      const l29 = worksheet.getCell('L29'); l29.value = '月入社'; applyCellStyle(l29, { fill: null, bold: false, fontSize: 14, hAlign: 'center' });
+      const p29 = worksheet.getCell('P29'); p29.value = '年'; applyCellStyle(p29, { fill: null, bold: false, fontSize: 14, hAlign: 'center' });
+      const r29 = worksheet.getCell('R29'); r29.value = '月退社'; applyCellStyle(r29, { fill: null, bold: false, fontSize: 14, hAlign: 'center' });
+      sdatC('T29','未経験'); slbl('H30','在籍期間'); sdatC('T30','未経験');
+    }
+
+    // ── Row 32-38: Family ──
+    slbl('A32','家族構成');
+    slbl('A33','名前'); slbl('L33','年齢'); slbl('R33','職業');
+    const famR=[34,35,36,37,38];
+    famR.forEach((rn,i)=>{
+      const f=(d.keluarga||[])[i]||{};
+      sdatC('A'+rn, relMap[f.hubungan]||f.hubungan||'');
+      sdat('C'+rn, f.nama||'');
+      sdatC('L'+rn, f.umur||'');
+      sdat('R'+rn, f.pekerjaan||'');
+    });
+
+    // ── Row 39-42: Strengths ──
+    slbl('A39','長所'); slbl('J39','短所');
+    const s39 = worksheet.getCell('S39'); s39.value = '「日本で働いてみたい期間（今の段階）」'; applyCellStyle(s39, { fill: null, bold: false, fontSize: 10, hAlign: 'center', wrap: true });
+    sdatW('A40', d.kelebihan||''); sdatW('J40', d.kekurangan||'');
+    sdatC('S40', d.durasi_ingin_kerja_jepang?(d.durasi_ingin_kerja_jepang+'年'):'');
+
+    // ── Row 43-48: Reasons ──
+    slbl('A43','日本で働きたい理由・優先順位３つまで');
+    const als=d.alasan_kerja_jepang||[];
+    sdatW('A44',als[0]||''); sdatW('A45',als[1]||''); sdatW('A46',als[2]||'');
+    slbl('A47','日本語学習期間'); sdatW('A48',d.lama_belajar_jepang||'');
+
+    // ── Row 49-53: Self PR ──
+    slbl('A49','自己PR・その仕事を志望する理由');
+    sdatW('A50',d.self_pr||'');
+
+    // ── Row 54-55: Notes ──
+    slbl('A54','備考欄'); sdatW('A55',d.catatan||'特にございません。');
+
+    const merges = [
+      {s:{r:0,c:0},e:{r:3,c:5}}, {s:{r:0,c:6},e:{r:3,c:19}}, {s:{r:0,c:20},e:{r:3,c:26}},
+      {s:{r:4,c:0},e:{r:5,c:3}}, {s:{r:4,c:4},e:{r:5,c:19}}, {s:{r:4,c:20},e:{r:13,c:26}},
+      {s:{r:6,c:0},e:{r:6,c:3}}, {s:{r:6,c:4},e:{r:6,c:13}}, {s:{r:6,c:14},e:{r:6,c:19}},
+      {s:{r:7,c:0},e:{r:7,c:3}}, {s:{r:7,c:4},e:{r:7,c:13}}, {s:{r:7,c:14},e:{r:8,c:19}},
+      {s:{r:8,c:0},e:{r:8,c:3}}, {s:{r:8,c:4},e:{r:8,c:13}},
+      {s:{r:9,c:0},e:{r:9,c:3}}, {s:{r:9,c:4},e:{r:9,c:6}}, {s:{r:9,c:12},e:{r:10,c:13}},
+      {s:{r:9,c:14},e:{r:10,c:15}}, {s:{r:9,c:16},e:{r:10,c:17}}, {s:{r:9,c:18},e:{r:10,c:19}},
+      {s:{r:10,c:0},e:{r:10,c:3}}, {s:{r:10,c:4},e:{r:10,c:7}}, {s:{r:10,c:8},e:{r:10,c:11}},
+      {s:{r:11,c:0},e:{r:11,c:19}}, {s:{r:12,c:0},e:{r:12,c:8}}, {s:{r:12,c:9},e:{r:12,c:19}},
+      {s:{r:13,c:0},e:{r:13,c:8}}, {s:{r:13,c:9},e:{r:13,c:19}},
+      {s:{r:14,c:0},e:{r:14,c:3}}, {s:{r:14,c:4},e:{r:14,c:8}}, {s:{r:14,c:9},e:{r:14,c:11}},
+      {s:{r:14,c:12},e:{r:14,c:14}}, {s:{r:14,c:15},e:{r:14,c:17}}, {s:{r:14,c:18},e:{r:14,c:20}},
+      {s:{r:14,c:21},e:{r:14,c:23}}, {s:{r:14,c:24},e:{r:14,c:26}},
+      {s:{r:15,c:0},e:{r:15,c:2}}, {s:{r:15,c:3},e:{r:15,c:6}}, {s:{r:15,c:7},e:{r:15,c:8}},
+      {s:{r:15,c:9},e:{r:15,c:11}}, {s:{r:15,c:12},e:{r:15,c:13}}, {s:{r:15,c:14},e:{r:15,c:15}},
+      {s:{r:15,c:16},e:{r:15,c:19}}, {s:{r:15,c:20},e:{r:15,c:22}}, {s:{r:15,c:23},e:{r:15,c:24}},
+      {s:{r:15,c:25},e:{r:15,c:26}},
+      {s:{r:16,c:0},e:{r:16,c:2}}, {s:{r:16,c:3},e:{r:16,c:4}}, {s:{r:16,c:5},e:{r:16,c:7}},
+      {s:{r:16,c:8},e:{r:16,c:10}}, {s:{r:16,c:11},e:{r:16,c:12}}, {s:{r:16,c:13},e:{r:16,c:15}},
+      {s:{r:16,c:16},e:{r:16,c:17}}, {s:{r:16,c:18},e:{r:16,c:19}}, {s:{r:16,c:21},e:{r:16,c:22}},
+      {s:{r:16,c:23},e:{r:16,c:24}}, {s:{r:16,c:25},e:{r:16,c:26}},
+      {s:{r:17,c:0},e:{r:17,c:26}}, {s:{r:18,c:0},e:{r:20,c:26}},
+      {s:{r:21,c:0},e:{r:21,c:26}}, {s:{r:22,c:0},e:{r:22,c:9}}, {s:{r:22,c:10},e:{r:22,c:14}},
+      {s:{r:22,c:15},e:{r:22,c:26}},
+    ];
+
+    [23,24,25].forEach(ri=>{
+      merges.push({s:{r:ri,c:0},e:{r:ri,c:6}}, {s:{r:ri,c:7},e:{r:ri,c:9}}, {s:{r:ri,c:10},e:{r:ri,c:14}}, {s:{r:ri,c:15},e:{r:ri,c:16}}, {s:{r:ri,c:18},e:{r:ri,c:19}}, {s:{r:ri,c:21},e:{r:ri,c:22}}, {s:{r:ri,c:25},e:{r:ri,c:26}});
+    });
+
+    merges.push(
+      {s:{r:26,c:0},e:{r:26,c:26}}, {s:{r:27,c:0},e:{r:27,c:6}}, {s:{r:27,c:7},e:{r:27,c:18}}, {s:{r:27,c:19},e:{r:27,c:26}},
+      {s:{r:28,c:0},e:{r:29,c:6}}, {s:{r:28,c:7},e:{r:28,c:8}}, {s:{r:28,c:11},e:{r:28,c:12}}, {s:{r:28,c:13},e:{r:28,c:14}}, {s:{r:28,c:17},e:{r:28,c:18}}, {s:{r:28,c:19},e:{r:28,c:26}},
+      {s:{r:29,c:7},e:{r:30,c:9}}, {s:{r:29,c:10},e:{r:30,c:18}}, {s:{r:29,c:19},e:{r:30,c:26}}, {s:{r:30,c:0},e:{r:30,c:6}},
+      {s:{r:31,c:0},e:{r:31,c:26}}, {s:{r:32,c:0},e:{r:32,c:10}}, {s:{r:32,c:11},e:{r:32,c:16}}, {s:{r:32,c:17},e:{r:32,c:26}}
+    );
+
+    [33,34,35,36,37].forEach(ri=>{
+      merges.push({s:{r:ri,c:0},e:{r:ri,c:1}}, {s:{r:ri,c:2},e:{r:ri,c:10}}, {s:{r:ri,c:11},e:{r:ri,c:16}}, {s:{r:ri,c:17},e:{r:ri,c:26}});
+    });
+
+    merges.push(
+      {s:{r:38,c:0},e:{r:38,c:8}}, {s:{r:38,c:9},e:{r:38,c:17}}, {s:{r:38,c:18},e:{r:38,c:26}},
+      {s:{r:39,c:0},e:{r:41,c:8}}, {s:{r:39,c:9},e:{r:41,c:17}}, {s:{r:39,c:18},e:{r:41,c:26}},
+      {s:{r:42,c:0},e:{r:42,c:26}}, {s:{r:43,c:0},e:{r:43,c:26}}, {s:{r:44,c:0},e:{r:44,c:26}}, {s:{r:45,c:0},e:{r:45,c:26}}, {s:{r:46,c:0},e:{r:46,c:26}}, {s:{r:47,c:0},e:{r:47,c:26}},
+      {s:{r:48,c:0},e:{r:48,c:26}}, {s:{r:49,c:0},e:{r:52,c:26}}, {s:{r:53,c:0},e:{r:53,c:26}}, {s:{r:54,c:0},e:{r:54,c:26}}
+    );
+
+    merges.forEach(m => {
+      try { worksheet.mergeCells(m.s.r + 1, m.s.c + 1, m.e.r + 1, m.e.c + 1); } catch(e) {}
+    });
+
+    if (d._photo_b64) {
+      const imageId = workbook.addImage({
+        base64: d._photo_b64,
+        extension: 'png'
+      });
+      worksheet.addImage(imageId, {
+        tl: { col: 20, row: 4 },   
+        br: { col: 27, row: 14 },  
+        editAs: 'oneCell'
+      });
+    }
+
+    for(let i=1; i<=27; i++) {
+      const col = worksheet.getColumn(i);
+      if(i===1) col.width = 4.5;
+      else if(i===19) col.width = 5.5;
+      else if(i===27) col.width = 4.5;
+      else col.width = 4;
+    }
+
+    for(let i=1; i<=55; i++) {
+      const row = worksheet.getRow(i);
+      let h = 20.1;
+      if(i>=40 && i<=42) h=25.2;
+      else if(i>=44 && i<=48) h=34.5;
+      else if(i===55) h=51;
+      row.height = h;
+    }
+
+    const buffer = await workbook.xlsx.writeBuffer();
+    const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const nama = (d.nama||'CV').replace(/\s+/g,'_');
+    saveAs(blob, `CV_${nama}.xlsx`);
+
+    st.innerHTML = '✅ File CV berhasil didownload! Cek folder Downloads.';
+    st.className = 'ok';
+  } catch(err) {
+    console.error(err);
+    st.textContent = '❌ Error: ' + err.message;
+    st.className = 'err';
+  } finally {
+    btn.disabled = false;
+    document.getElementById('ov').classList.remove('show');
+  }
+}
+
+// ── Event Listener untuk Hitung Umur Otomatis ──
+document.getElementById('tth').addEventListener('input', hitungUmur);
+document.getElementById('tbl').addEventListener('change', hitungUmur);
+document.getElementById('thr').addEventListener('input', hitungUmur);
+
+// ── Init default entries ──
+addEdu({jenjang:'SD'}); addEdu({jenjang:'SMP'}); addEdu({jenjang:'SMA'});
+addFam({hub:'Ayah'}); addFam({hub:'Ibu'});
+</script>
+</body>
+</html>
